@@ -69,4 +69,14 @@ public class HotelJpaService implements HotelRepository {
         }
         throw new ResponseStatusException(HttpStatus.NO_CONTENT);
     }
+
+    @Override
+    public List<Room> getHotelRooms(int hotelId) {
+        try {
+            Hotel hotel = hotelJpaRepository.findById(hotelId).get();
+            return roomJpaRepository.findByHotel(hotel);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 }

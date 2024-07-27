@@ -1,7 +1,9 @@
 package com.example.nxtstayz.service;
 
 import com.example.nxtstayz.model.Hotel;
+import com.example.nxtstayz.model.Room;
 import com.example.nxtstayz.repository.HotelJpaRepository;
+import com.example.nxtstayz.repository.RoomJpaRepository;
 import com.example.nxtstayz.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +15,12 @@ import java.util.List;
 
 @Service
 public class HotelJpaService implements HotelRepository {
+
     @Autowired
     private HotelJpaRepository hotelJpaRepository;
+
+    @Autowired
+    private RoomJpaRepository roomJpaRepository;
 
     @Override
     public ArrayList<Hotel> getHotels() {
@@ -75,7 +81,7 @@ public class HotelJpaService implements HotelRepository {
         try {
             Hotel hotel = hotelJpaRepository.findById(hotelId).get();
             return roomJpaRepository.findByHotel(hotel);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }

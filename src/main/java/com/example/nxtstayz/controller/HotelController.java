@@ -1,12 +1,13 @@
 package com.example.nxtstayz.controller;
-import com.example.nxtstayz.model.Room;
+
 import com.example.nxtstayz.model.Hotel;
 import com.example.nxtstayz.service.HotelJpaService; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import com.example.nxtstayz.model.Room;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class HotelController {
@@ -16,12 +17,12 @@ public class HotelController {
     @GetMapping("/hotels")
     public ArrayList<Hotel> getHotels() {
         return hotelJpaService.getHotels();
-
     }
      @GetMapping("/hotels/{hotelId}/rooms")
     public List<Room> getHotelRooms(@PathVariable("hotelId") int hotelId) {
         return hotelJpaService.getHotelRooms(hotelId);
     }
+    
     @PostMapping("/hotels")
     public Hotel addHotel(@RequestBody Hotel hotel) {
         return hotelJpaService.addHotel(hotel);
